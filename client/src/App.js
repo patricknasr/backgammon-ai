@@ -1,25 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Welcome from "./components/Welcome";
+import Profile from "./components/Profile";
 
-function App() {
-  const [data, setData] = useState([{}]);
+function HomeComponent() {
+  let navigate = useNavigate();
 
-  useEffect(() => {
-    fetch("/members")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        console.log(data);
-      });
-  }, []);
+  function navigateToWelcome() {
+    navigate("/welcome");
+  }
+
+  function navigateToProfile() {
+    navigate("/profile");
+  }
 
   return (
     <div>
-      {typeof data.members === "undefined" ? (
-        <p>Loading...</p>
-      ) : (
-        data.members.map((member, i) => <p key={i}>{member}</p>)
-      )}
+      <button onClick={navigateToWelcome}>Go to Welcome Page</button>
+      <button onClick={navigateToProfile}>Go to Profile Page</button>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomeComponent />} />
+        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </Router>
   );
 }
 
