@@ -1,3 +1,11 @@
-def process_integer(input_integer):
-    result = int(input_integer) * 2
-    return result
+def process_integer(integer, operation):
+    if operation == 'double':
+        return integer * 2
+    elif operation == 'halve':
+        return integer / 2
+    elif operation == 'subtract':
+        return integer - 1
+    elif operation == 'add':
+        return integer + 3
+    else:
+        return "Invalid operation"

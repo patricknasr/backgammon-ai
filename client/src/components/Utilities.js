@@ -1,28 +1,23 @@
 import React, { useState } from "react";
 import Navigation from "./Navigation";
 
-function Profile() {
+function Utilities() {
   const [integer, setInteger] = useState("");
+  const [operation, setOperation] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [result, setResult] = useState(null); // Added state to store the result
+  const [result, setResult] = useState(null);
 
-  const handleNumberChange = (event) => {
-    if (!isSubmitted) {
-      setInteger(event.target.value);
-    }
-  };
+  const handleNumberChange = (event) => setInteger(event.target.value);
+  const handleOperationChange = (event) => setOperation(event.target.value);
 
   const handleSubmit = async () => {
     setIsSubmitted(true);
-    console.log("Selected Number:", integer); // Logs the selected color to the console
-
-    // Make a POST request to your Flask backend
     const response = await fetch("/process-integer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ integer }),
+      body: JSON.stringify({ integer: parseInt(integer, 10), operation }),
     });
 
     if (response.ok) {
@@ -33,7 +28,7 @@ function Profile() {
 
   const handleEdit = () => {
     setIsSubmitted(false);
-    setResult(null); // Reset the result when editing
+    setResult(null);
   };
 
   return (
@@ -57,6 +52,18 @@ function Profile() {
         <option value="8">8</option>
         <option value="9">9</option>
       </select>
+      <p>Select an operation:</p>
+      <select
+        value={operation}
+        onChange={handleOperationChange}
+        disabled={isSubmitted}
+      >
+        <option value="">Select an Operation</option>
+        <option value="double">Double Integer</option>
+        <option value="halve">Halve Integer</option>
+        <option value="subtract">Subtract One</option>
+        <option value="add">Add Three</option>
+      </select>
       <button onClick={handleSubmit} disabled={isSubmitted}>
         Submit
       </button>
@@ -68,4 +75,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Utilities;

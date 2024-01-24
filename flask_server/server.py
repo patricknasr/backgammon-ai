@@ -10,8 +10,9 @@ def home():
 @app.route('/process-integer', methods=['POST'])
 def handle_integer():
     data = request.get_json()
-    input_integer = data.get('integer')
-    result = process_integer(input_integer)
+    input_integer = int(data.get('integer'))
+    operation = data.get('operation')
+    result = process_integer(input_integer, operation)
     return jsonify({'result': result})
 
 if __name__ == "__main__":
