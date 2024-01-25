@@ -24,14 +24,6 @@ function HomeComponent() {
     navigate("/profile");
   }
 
-  function navigateToUtilities() {
-    navigate("/utilities");
-  }
-
-  function navigateToCountDown() {
-    navigate("/countdown");
-  }
-
   function navigateToExample() {
     navigate("/example");
   }
