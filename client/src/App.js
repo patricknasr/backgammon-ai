@@ -5,11 +5,15 @@ import Welcome from "./components/Welcome";
 import Profile from "./components/Profile";
 import Utilities from "./components/Utilities";
 import Countdown from "./components/CountDown";
+import TopBar from "./components/TopBar";
 import ExampleComponent from "./components/Example";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
 function HomeComponent() {
+  const theme = useTheme();
+
   let navigate = useNavigate();
 
   function navigateToWelcome() {
@@ -38,45 +42,41 @@ function HomeComponent() {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      style={{ marginTop: 200 }}
     >
+      <TopBar />
+      <div style={{ height: 100 }}></div>
       <Button
         variant="contained"
-        color="primary"
         onClick={navigateToWelcome}
-        style={{ marginBottom: 50 }}
+        style={{
+          backgroundColor: theme.palette.primary.light,
+          color: "white",
+          marginBottom: 50,
+        }}
       >
         Welcome Page
       </Button>
       <Button
         variant="contained"
-        color="primary"
+        color="warning"
         onClick={navigateToProfile}
-        style={{ marginBottom: 50 }}
+        style={{
+          backgroundColor: theme.palette.secondary.light,
+          color: "white",
+          marginBottom: 50,
+        }}
       >
         Profile Page
       </Button>
       <Button
         variant="contained"
-        color="primary"
-        onClick={navigateToUtilities}
-        style={{ marginBottom: 50 }}
-      >
-        Utilities Page
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={navigateToCountDown}
-        style={{ marginBottom: 50 }}
-      >
-        Count Down Page
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
+        color="secondary"
         onClick={navigateToExample}
-        style={{ marginBottom: 50 }}
+        style={{
+          backgroundColor: theme.palette.success.light,
+          color: "white",
+          marginBottom: 50,
+        }}
       >
         Example Page
       </Button>
