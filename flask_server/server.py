@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from src.utilities import process_integer
+from flask_server.src.utilities import process_integer
 
 app = Flask(__name__)
 
