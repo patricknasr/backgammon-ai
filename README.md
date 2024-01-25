@@ -1,1 +1,1 @@
-# backgammon.ai
+# backgammon-ai

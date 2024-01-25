@@ -1,4 +1,4 @@
-name: Python application
+name: backgammon-ai
 on: [push, pull_request]
 jobs:
   build:
