@@ -30,4 +30,15 @@ class NegativePiecesCountAtPoint(Exception):
     def __init__(self, message="Less than zero pieces."):
         self.message = message
         super().__init__(self.message)
+
+class TooManyPiecesCountAtPoint(Exception):
+    """Exception raised for a point with more than 16 pieces (1 + 15).
+
+    Attributes:
+        message -- explanation of the error
+    """
+
+    def __init__(self, message="Too many pieces."):
+        self.message = message
+        super().__init__(self.message)
         
