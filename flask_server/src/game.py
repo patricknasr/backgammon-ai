@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from .errors import InvalidColour, NegativePiecesCountAtPoint
+# from .errors import InvalidColour, NegativePiecesCountAtPoint
 import random
 import enum
 
@@ -27,7 +27,8 @@ def computer_piece_type(player_piece_type: Piece) -> Piece:
         elif player_piece_type == Piece.DARK:
             return Piece.LIGHT
         else:
-            raise InvalidColour
+            # raise InvalidColour
+            pass
     
 class BoardView:
     def __init__(self):
@@ -43,7 +44,8 @@ class BoardView:
         elif colour == Piece.DARK:
             new_position = max(original_position-move_by, 0)
         else:
-            raise InvalidColour
+            # raise InvalidColour
+            pass
         
         self._board.points[original_position].pieces.remove(colour)
         self._board.points[new_position].pieces.remove(colour)
@@ -60,7 +62,8 @@ class BoardView:
         elif len(self._board.points[point_index].pieces) > 0:
             return False
         else:
-            raise NegativePiecesCountAtPoint
+            # raise NegativePiecesCountAtPoint
+            pass
 
     def can_place_on_point(self, player_piece_type: Piece, point_index: int) -> bool:
         if self.point_is_empty(point_index) or \
@@ -73,6 +76,7 @@ class BoardView:
 
 def main():
     initialise_board = BoardView()
+    print('hello')
 
 if __name__ == "__main__":
     main()
