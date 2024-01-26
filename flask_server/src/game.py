@@ -38,17 +38,19 @@ class BoardView:
 
         self._board.points[24].pieces = [Piece.DARK for _ in range(15)]
     
-    def move_piece(self, colour: Piece, original_position: int, move_by: int):
-        if colour == Piece.LIGHT:
+    def move_piece(self, move_colour: Piece, original_position: int, move_by: int) -> bool:
+        if move_colour == Piece.LIGHT:
             new_position = min(original_position+move_by, MAX_POINT_POS)
-        elif colour == Piece.DARK:
+        elif move_colour == Piece.DARK:
             new_position = max(original_position-move_by, 0)
         else:
             # raise InvalidColour
-            pass
+            return False
         
-        self._board.points[original_position].pieces.remove(colour)
-        self._board.points[new_position].pieces.remove(colour)
+        self._board.points[original_position].pieces.remove(move_colour)
+        self._board.points[new_position].pieces.append(move_colour)
+
+        return True
     
     def has_game_been_won(self) -> bool:
         if len(self._board.points[MIN_POINT_POS].pieces) == 15 or len(self._board.points[MAX_POINT_POS].pieces) == 15:
@@ -73,10 +75,26 @@ class BoardView:
             return True
     
         return False
+    
+    def print_board_to_cli(self):
+        print("\n")
+        for idx, point in enumerate(self._board.points):
+            light_count = point.pieces.count(Piece.LIGHT)
+            dark_count = point.pieces.count(Piece.DARK)
+
+            pieces_str = ""
+            if light_count > 0:
+                pieces_str += f"(L - {light_count}) "
+            if dark_count > 0:
+                pieces_str += f"(D - {dark_count})"
+
+            print(f"{idx:02d}: {pieces_str.strip()}")
 
 def main():
     initialise_board = BoardView()
-    print('hello')
+    initialise_board.print_board_to_cli()
+    initialise_board.move_piece(move_colour=Piece.LIGHT, original_position=1, move_by=1)
+    initialise_board.print_board_to_cli()
 
 if __name__ == "__main__":
     main()
